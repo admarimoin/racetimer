@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>RaceTimer</title>
+		<!-- lib reading start -->
+		<link href="bootstrap.min.css" rel="stylesheet">
+		<script src="bootstrap.min.js"></script>
+		<script src="anime.min.js"></script>
+		<script src="jquery-3.3.1.min.js"></script>
+		<!-- lib reading end -->
+		<link rel="stylesheet" href="racetimer.css" type="text/css"/>
+		<link rel="icon" href="icon.jpg">
+	</head>
+	<body style="background: #000;">
+		<aside class="text-center scriptalert">
+			<noscript>
+				<div class="container">
+        			<div class="alert alert-danger" role="alert">
+        				JavaScriptがオフになっているようです。JavaScriptをオンにしてください。
+        			</div>
+				</div>
+			</noscript>
+		</aside>
+		<section class="passsec text-center container">
+			<p>
+				<div id="showArea" class="showRaceTime" style="font-family: digitalfont;"></div>
+			</p>
+			<br>
+			<p>
+				<ul id="showLapArea" class="showLap" style="font-family: digitalfont;">
+				</ul>
+			</p>
+		</section>
+	</body>
+	<script>
+		//keydown code
+		document.onkeydown = keydown;
+		let flag = 0; //flag 0 -> not running, 1 -> running
+		function keydown(){
+			if(event.key == "Enter" && flag == 0){
+				start();
+			}
+			else if(event.key == "Enter" && flag == 1){
+				stop();
+			}
+			else if(event.keyCode == 32){
+				reset();
+			}
+			else if(event.key == "l" && flag == 1){
+				lap();
+			}
+			else if(event.key == "r" && flag == 1){
+				lapreset();
+			}
+		}
+		//keydown end
+		//addzero code
+		function addzero(num){
+			if(num < 10){
+				ret = "0" + num;
+				return ret;
+			} else {
+				return num;
+			}
+		}
+		//addzero end
+		//passsec code
+		var passSec,passMsec,passMin,lapnum;
+		
+		passMsec = 0;
+		passSec = 0;
+		passMin = 0;
+		lapnum = 0;
+		var defaultmsg = "00:00:00";
+		var defaultlap = "LAP0" + "&nbsp;&nbsp;" + "/" + "&nbsp;&nbsp;" + "00:00:00"
+		
+		document.getElementById("showArea").innerHTML = defaultmsg;
+		function showSec(){
+			passMsec++;
+			
+			if(passMsec > 99){
+				passMsec = 0;
+				passSec++;
+			}
+			if(passSec > 59){
+				passSec = 0;
+				passMin++;
+			}
+			
+			var msg = addzero(passMin) + ":" + addzero(passSec) + ":" + addzero(passMsec);
+			
+			document.getElementById("showArea").innerHTML = msg;
+		}
+		
+		function start(){
+			timer = setInterval('showSec()',10);
+			
+			flag = 1;
+		}
+		
+		function stop(){
+			clearInterval(timer);
+			
+			flag = 0;
+		}
+		
+		function reset(){
+			passSec = 0;
+			passMsec = 0;
+			passMin = 0;
+			lapnum = 0;
+			
+			var resetlap = "LAP" + lapnum + "&nbsp;&nbsp;" + "/" + "&nbsp;&nbsp;" + addzero(passMin) + ":" + addzero(passSec) + ":" + addzero(passMsec);
+			
+			clearInterval(timer);
+			
+			document.getElementById("showArea").innerHTML = defaultmsg;
+			document.getElementById("showLapArea").innerHTML = "";
+			
+			flag = 0;
+		}
+
+		function lap(){
+			lapnum++;
+			var laptime = "LAP" + lapnum + "&nbsp;&nbsp;" + "/" + "&nbsp;&nbsp;" + addzero(passMin) + ":" + addzero(passSec) + ":" + addzero(passMsec);
+			
+			var lapArea = document.getElementById("showLapArea");
+			var makeli = document.createElement("li");
+
+			makeli.innerHTML = laptime;
+			lapArea.appendChild(makeli);
+		}
+
+		function lapreset(){
+			lapnum = 0;
+
+			var resetlap = "LAP" + lapnum + "&nbsp;&nbsp;" + "/" + "&nbsp;&nbsp;" + addzero(passMin) + ":" + addzero(passSec) + ":" + addzero(passMsec);
+			
+			document.getElementById("showLapArea").innerHTML = "";
+		}
+		//passsec end
+	</script>
+</html>
