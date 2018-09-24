@@ -1,0 +1,33 @@
+@font-face{
+	font-family: 'digitalfont';
+	src: url(digitalfont.ttf);
+}
+
+html{
+	overflow: auto;
+}
+body{
+	overflow: hidden;
+}
+li{
+	list-style: none;
+}
+
+.scriptalert{
+	margin-top: 50px;
+}
+.passsec{
+	padding-top: 40px;
+	padding-bottom: 20px;
+	padding-right: 20px;
+	padding-left: 20px;
+}
+.showRaceTime{
+	font-size: 200px;
+	color: #ff0;
+	text-shadow: 0 0 20px #cc0,0 0 20px #cc0;
+}
+.showLap{
+	font-size: 30px;
+	color: #ff0;
+}
