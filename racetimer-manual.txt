@@ -1,0 +1,4 @@
+Enter -> Start/Stop
+Space -> Reset
+l -> Lap
+r -> Reset Lap

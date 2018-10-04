@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Rank</title>
+		<!-- lib reading start -->
+		<link href="bootstrap.min.css" rel="stylesheet">
+		<script src="bootstrap.min.js"></script>
+		<script src="anime.min.js"></script>
+		<script src="jquery-3.3.1.min.js"></script>
+		<!-- lib reading end -->
+		<link rel="stylesheet" href="rank.css" type="text/css"/>
+		<link rel="icon" href="icon.jpg">
+	</head>
+	<body style="background: #000;">
+		<section class="showrankScope">
+			<div class="row">
+				<p>
+					<div class="text-center col-sm-5">
+						<p><h1><b>1</b></h1></p>
+					</div>
+					<div class="text-center col-sm-5">
+						<p class="rank1 showrank" id="rank1"></p>
+					</div>
+				</p>
+			</div>
+			<br>
+			<div class="row">
+				<p>
+					<div class="text-center col-sm-5">
+						<p><h2><b>2</b></h2></p>
+					</div>
+					<div class="text-center col-sm-5">
+						<p class="rank2 showrank" id="rank2"></p>
+					</div>
+				</p>
+			</div>
+			<br>
+			<div class="row">
+				<p>
+					<div class="text-center col-sm-5">
+						<p><h3 class="show3"><b>3</b></h3></p>
+					</div>
+					<div class="text-center col-sm-5">
+						<p class="rank3 showrank" id="rank3"></p>
+					</div>
+				</p>
+			</div>
+			<br>
+			<div class="row show45">
+				<p>
+					<div class="text-center col-sm-2">
+						<p><h3 class="show4"><b>4</b></h3></p>
+					</div>
+					<div class="text-left col-sm-4">
+						<p class="rank4 showrank" id="rank4"></p>
+					</div>
+					<div class="text-center col-sm-2">
+						<p><h3 class="show5">5</h3></p>
+					</div>
+					<div class="text-left col-sm-4">
+						<p class="rank5 showrank" id="rank5"></p>
+					</div>
+				</p>
+			</div>
+		</section>
+	</body>
+	<script>
+		var mac = {
+			name1: "たまごっち",
+			name2: "斎藤さん",
+			name3: "あほくさ",
+			name4: "タンゴ",
+			name5: "にゃんこ号"
+		};
+		var maclist = [];
+		var showstatus = 0;
+
+		//keydown code
+		document.onkeydown = function keydown(){
+			if(event.key == "Enter"){
+				show();
+			}
+			else if(event.keyCode == 49){    //1
+				maclist.push(mac.name1);
+			}
+			else if(event.keyCode == 50){    //2
+				maclist.push(mac.name2);
+			}
+			else if(event.keyCode == 51){    //3
+				maclist.push(mac.name3);
+			}
+			else if(event.keyCode == 52){    //4
+				maclist.push(mac.name4);
+			}
+			else if(event.keyCode == 53){    //5
+				maclist.push(mac.name5);
+			}
+			else if(event.key == "r"){
+				maclist = [];
+			}
+			else if(event.keyCode == 32 && showstatus){
+				showreset();
+			}
+		};
+		//keycode end
+
+		//rank code
+		function show(){
+			maclist = maclist.filter(function(x, i, self){
+				return self.indexOf(x) === i;
+			});
+
+			playsound();
+			setTimeout(function(){
+				$("#rank4").html(maclist[3]).hide().fadeIn(1000);
+				$("#rank5").html(maclist[4]).hide().fadeIn(1000);
+			}, 3000);
+			setTimeout(function(){
+				$("#rank4").fadeOut(2000);
+				$("#rank5").fadeOut(2000);
+				$(".show45").fadeOut(2000);
+			}, 6000);
+			setTimeout(function(){
+				$("#rank3").html(maclist[2]).hide().fadeIn(1000);
+			}, 7000);
+			setTimeout(function(){
+				$("#rank2").html(maclist[1]).hide().fadeIn(1000);
+			}, 7500);
+			setTimeout(function(){
+				$("#rank1").html(maclist[0]).hide().fadeIn(2000);
+				maclist = [];
+			}, 8500);
+
+			showstatus = 1;
+		}
+		function showreset(){
+			$("#rank1, #rank2, #rank3, #rank4, #rank5").html("");
+			$(".show45").show();
+		}
+		//rank end
+
+		//audio code
+		function playsound(){
+			var ochinchin = new Audio();
+			ochinchin.src = "soundofan.mp3";
+			ochinchin.play();
+		}
+		//audio end
+	</script>
+</html>

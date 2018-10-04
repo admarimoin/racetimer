@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>TMCC-Test</title>
+		<link href="bootstrap.min.css" rel="stylesheet">
+		<script src="bootstrap.min.js"></script>
+		<script src="anime.min.js"></script>
+		<script src="jquery-3.3.1.min.js"></script>
+		<link rel="stylesheet" href="style.css" type="text/css"/>
+		<link rel="icon" href="icon.jpg">
+	</head>
+	<body style="background: #ffefef">
+		<section class="bet text-center container">
+			<h1>Vote Result</h1>
+			<p>
+				<div class="row">
+					<div class="col-sm-4 text-center">
+						<p class="machineName">machine 1</p>
+						<p class="catch" id="num1"><b>0</b>%</p>
+					</div>
+					
+					<div class="col-sm-4 text-center">
+						<p class="machineName">machine 2</p>
+						<p class="catch" id="num2"><b>0</b>%</p>
+					</div>
+					
+					<div class="col-sm-4 text-center">
+						<p class="machineName">machine 3</p>
+						<p class="catch" id="num3"><b>0</b>%</p>
+					</div>
+				</div>
+			</p>
+			
+			<p>
+				<div class="row">
+					<div class="col-sm-6 text-center">
+						<p class="machineName">machine 4</p>
+						<p class="catch" id="num4"><b>0</b>%</p>
+					</div>
+					
+					<div class="col-sm-6 text-center">
+						<p class="machineName">machine 5</p>
+						<p class="catch" id="num5"><b>0</b>%</p>
+					</div>
+				</div>
+			</p>
+		</section>
+		
+		<section class="passsec text-center container">
+			<h1>Race Time</h1>
+			<p>
+				<div id="showArea" class="showRaceTime" style="font-family: digitalfont"></div>
+			</p>
+			
+			<p class="row">
+				<button value="start" id="startBtn" class="btn btn-default" onclick="start();">
+				<button value="stop" id="stopBtn" class="btn btn-default" onclick="stop();">
+				<button value="reset" id="resetBtn" class="btn btn-default" onclick="reset();">
+			</p>
+		</section>
+		
+		<section class="time text-center container">
+			<h1>Current Time</h1>
+			<p class="row">
+				<div id="nowtime" class="nowtime text-center"></div>
+			</p>
+		</section>
+	</body>
+	<script>
+		//vote code
+		anime({
+			targets: '.catch',
+			scale: [0,2.0]
+		});
+		
+		$({count: 0}).animate({count: 30}, {
+			duration: 1000,
+			easing: 'linear',
+			progress: function() { 
+				$('#num1 b').text(Math.ceil(this.count)); 
+			}
+		});
+		
+		$({count: 0}).animate({count: 45}, {
+			duration: 1000,
+			easing: 'linear',
+			progress: function() { 
+				$('#num2 b').text(Math.ceil(this.count)); 
+			}
+		});
+		
+		$({count: 0}).animate({count: 25}, {
+			duration: 1000,
+			easing: 'linear',
+			progress: function() { 
+				$('#num3 b').text(Math.ceil(this.count)); 
+			}
+		});
+		
+		$({count: 0}).animate({count: 38}, {
+			duration: 1000,
+			easing: 'linear',
+			progress: function() { 
+				$('#num4 b').text(Math.ceil(this.count)); 
+			}
+		});
+		
+		$({count: 0}).animate({count: 24}, {
+			duration: 1000,
+			easing: 'linear',
+			progress: function() { 
+				$('#num5 b').text(Math.ceil(this.count)); 
+			}
+		});
+		//vote end
+		
+		//addzero code
+		function addzero(num){
+			if(num < 10){
+				ret = "0" + num;
+				return ret;
+			} else {
+				return num;
+			}
+		}
+		//addzeto end
+		//time code
+		function showClock(){
+			var time = new Date();
+			var hour = addzero(time.getHours());
+			var min = addzero(time.getMinutes());
+			var sec = addzero(time.getSeconds());
+			var msg = hour + ":" + min + ":" + sec;
+			
+			var elem = document.getElementById("nowtime");
+			elem.innerHTML = msg;
+		}
+		setInterval('showClock()',500);
+		//time end
+		
+		//passsec code
+		var passSec,passMsec,passMin;
+		
+		passMsec = 0;
+		passSec = 0;
+		passMin = 0;
+		defaultmsg = "00:00:00";
+		
+		document.getElementById("showArea").innerHTML = defaultmsg;
+		function showSec(){
+			passMsec++;
+			
+			if(passMsec > 99){
+				passMsec = 0;
+				passSec++;
+			}
+			if(passSec > 59){
+				passSec = 0;
+				passMin++;
+			}
+			
+			var msg = addzero(passMin) + ":" + addzero(passSec) + ":" + addzero(passMsec);
+			
+			document.getElementById("showArea").innerHTML = msg;
+		}
+		
+		function start(){
+			timer = setInterval('showSec()',10);
+			
+			document.getElementById("startBtn").disabled = true;
+		}
+		
+		function stop(){
+			clearInterval(timer);
+			
+			document.getElementById("startBtn").disabled = false;
+		}
+		
+		function reset(){
+			passSec = 0;
+			passMsec = 0;
+			passMin = 0;
+			
+			clearInterval(timer);
+			
+			document.getElementById("showArea").innerHTML = defaultmsg;
+			document.getElementById("startBtn").disabled = false;
+		}
+		//passsec end
+	</script>
+</html>

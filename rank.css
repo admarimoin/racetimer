@@ -1,0 +1,61 @@
+@font-face{
+	font-family: 'digitalfont';
+	src: url(digitalfont.ttf);
+}
+
+html{
+	overflow: auto;
+}
+body{
+	overflow: hidden;
+}
+
+h1{
+	font-size: 100px;
+	color: #ffd700;
+	text-shadow: 0 0 10px #ffd700, 0 0 10px #ffd700;
+}
+h2{
+	font-size: 75px;
+	color: #fff;
+	text-shadow: 0 0 10px #d3d3d3, 0 0 10px #d3d3d3;
+}
+h3.show3{
+	font-size: 60px;
+	color: #c47222;
+	text-shadow: 0 0 7px #c47222, 0 0 7px #c47222;
+}
+h3.show4,h3.show5{
+	font-size: 50px;
+	color: #fff;
+	text-shadow: 0 0 7px #fff, 0 0 7px #fff;
+}
+
+.showrankScope{
+	margin-top: 60px;
+}
+.rank1{
+	color: #ffd700;
+	font-size: 100px;
+	text-shadow: 0 0 7px #ffd700, 0 0 7px #ffd700;
+}
+.rank2{
+	color: #fff;
+	font-size: 75px;
+	text-shadow: 0 0 7px #d3d3d3, 0 0 7px #d3d3d3;
+}
+.rank3{
+	color: #fff;
+	font-size: 60px;
+	text-shadow: 0 0 7px #c47222, 0 0 7px #c47222;
+}
+.rank4,.rank5{
+	color: #fff;
+	font-size: 50px;
+	text-shadow: 0 0 7px #fff, 0 0 7px #fff;
+}
+.show45{
+	margin-left: 20px;
+	margin-right: 20px;
+	box-sizing: border-box;
+}

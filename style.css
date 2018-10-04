@@ -1,0 +1,36 @@
+@font-face{
+	font-family: 'digitalfont';
+	src: url(digitalfont.ttf);
+}
+
+html{
+	overflow: auto;
+}
+body{
+	overflow: hidden;
+}
+.catch{
+	font-size: 40px;
+	box-sizing: border-box;
+}
+.bet{
+	padding: 70px;
+	box-sizing: border-box;
+}
+.passsec{
+	padding: 70px;
+	box-sizing: border-box;
+}
+.time{
+	padding: 70px;
+	box-sizing: border-box;
+}
+.nowtime{
+	font-size: 30px;
+}
+.machineName{
+	font-size: 30px;
+}
+.showRaceTime{
+	font-size: 180px;
+}

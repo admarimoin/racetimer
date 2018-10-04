@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="マイコン">
+		<title>Micom</title>
+		<link href="../html/css/bootstrap.min.css" rel="stylesheet">
+		<script src="../html/js/bootstrap.min.js"></script>
+		<script src="anime.min.js"></script>
+		<link rel="stylesheet" href="style.css" type="text/css"/>
+		<link rel="icon" href="icon.jpg">
+	</head>
+	<body>
+		<div id="update">
+			<div class="logs"> <input class="log current-time-log"> <input class="log progress-log"> </div>
+			<div class="large square el"></div>
+		</div>
+	</body>
+	<script>
+	var updateLogEl = document.querySelector('#update .current-time-log');
+	var progressLogEl = document.querySelector('#update .progress-log');
+
+	var update = anime({
+		targets: '#callbacks .el',
+		translateX: 250,
+		delay: 1000,
+		update: function(anim) {
+			updateLogEl.value = 'current time : ' + Math.round(anim.currentTime) + 'ms';
+			progressLogEl.value = 'progress : ' + Math.round(anim.progress) + '%';
+		}
+	});
+	</script>
+</html>
